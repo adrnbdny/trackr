@@ -100,9 +100,12 @@ export function SidebarMenuButton({
   asChild?: boolean
   className?: string
 }) {
-  const Component = asChild ? React.Fragment : "button"
+  if (asChild) {
+    return <>{children}</>
+  }
+
   return (
-    <Component
+    <button
       className={cn(
         "flex items-center w-full px-3 py-2 text-sm font-medium rounded-md",
         isActive ? "bg-gray-800 text-white" : "text-gray-400 hover:bg-gray-800 hover:text-white",
@@ -110,7 +113,7 @@ export function SidebarMenuButton({
       )}
     >
       {children}
-    </Component>
+    </button>
   )
 }
 

@@ -11,7 +11,7 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getSession()
 
   // Public paths that don't require authentication
-  const publicPaths = ["/login"]
+  const publicPaths = ["/login", "/signup"]
   const isPublicPath = publicPaths.includes(req.nextUrl.pathname)
 
   // Auth callback paths should always be accessible
@@ -27,7 +27,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl)
   }
 
-  // If session and on login page, redirect to home
+  // If session and on login or signup page, redirect to home
   if (session && isPublicPath) {
     const redirectUrl = req.nextUrl.clone()
     redirectUrl.pathname = "/"

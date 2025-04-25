@@ -12,7 +12,6 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuButton,
 } from "@/components/ui/sidebar"
 
 export function AppSidebar() {
@@ -67,12 +66,23 @@ export function AppSidebar() {
         <SidebarMenu>
           {navItems.map((item) => (
             <SidebarMenuItem key={item.name}>
-              <SidebarMenuButton asChild isActive={item.active}>
-                <Link href={item.href} className="flex items-center">
+              {item.active ? (
+                <Link
+                  href={item.href}
+                  className="flex items-center w-full px-3 py-2 text-sm font-medium rounded-md bg-gray-800 text-white"
+                >
                   <item.icon className="mr-2 h-5 w-5" />
                   <span>{item.name}</span>
                 </Link>
-              </SidebarMenuButton>
+              ) : (
+                <Link
+                  href={item.href}
+                  className="flex items-center w-full px-3 py-2 text-sm font-medium rounded-md text-gray-400 hover:bg-gray-800 hover:text-white"
+                >
+                  <item.icon className="mr-2 h-5 w-5" />
+                  <span>{item.name}</span>
+                </Link>
+              )}
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
